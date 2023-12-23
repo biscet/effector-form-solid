@@ -1,6 +1,6 @@
 {
   "name": "effector-form-solid",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Effector Form by 42-px for Solidjs",
   "main": "./dist/effector-form-solid.cjs.js",
   "jsnext:main": "./dist/index.js",
@@ -19,20 +19,22 @@
   "author": "Егор Прохоров <befealmellow@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "build": "cross-env NODE_ENV=production rollup -c rollup.config.js"
+    "build": "cross-env NODE_ENV=production rollup -c rollup.config.js && babel src -d dist"
   },
   "peerDependencies": {
     "effector": ">=22.8.6 <24.0.0",
     "effector-solid": ">=0.22.7"
   },
   "dependencies": {
-    "@babel/core": "^7.23.6",
+    "@babel/cli": "7.23.4",
+    "@babel/core": "7.23.6",
     "@babel/preset-env": "7.23.6",
     "@rollup/plugin-babel": "5.3.1",
     "@rollup/plugin-commonjs": "21.1.0",
     "@rollup/plugin-node-resolve": "13.3.0",
     "@rollup/plugin-replace": "3.1.0",
-    "babel-preset-solid": "^1.8.6",
+    "babel-preset-minify": "0.5.2",
+    "babel-preset-solid": "1.8.6",
     "cross-env": "7.0.3",
     "effector": "22.8.6",
     "effector-solid": "0.22.7",

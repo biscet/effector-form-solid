@@ -1,0 +1,1 @@
+import{createStore,createEvent}from"effector";function store({init:a,domain:b,existing:c},d){return c?c:b?b.createStore(a,d):createStore(a,d)}function event({domain:a,existing:b}){return b?b:a?a.createEvent():createEvent()}export const createFormUnit={store,event};

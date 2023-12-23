@@ -1,0 +1,1 @@
+import{useUnit}from"effector-solid";const isEmpty=a=>[Object,Array].includes((a||{}).constructor)&&0===Object.entries(a||{}).length;export const useForm=(a,b)=>{const c=useUnit(a),d=useUnit(a.$values);let e={};isEmpty(b)||b.forEach(b=>{e={...e,[b]:useUnit(a.fields[b])}});return{...c,fields:a.fields,sumbit:a=>{a.preventDefault(),c.submit()},values:d,signalValues:e}};
