@@ -4,11 +4,11 @@
 - [Использование effector-forms](#effector-forms)
 - [Hook useForm для SolidJS](#useForm)
 
-## Установка
+<a name="setup"><h2>Установка</h2></a>
 
 `yarn add effector-form-solid` or `npm install effector-form-solid`
 
-## Использование effector-forms
+<a name="effector-forms"><h2>Использование effector-forms</h2></a>
 
 ```js
 import { sample } from "effector";
@@ -48,7 +48,7 @@ sample({
 
 [Подробное описание можно найти в оригинальном репозитории 42-px](https://github.com/42-px/effector-forms)
 
-## Hook useForm для SolidJS
+<a name="useForm"><h2>Hook useForm для SolidJS</h2></a>
 
 ```js
 import { useForm } from "src/lib/effector-forms";
