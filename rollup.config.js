@@ -37,16 +37,6 @@ const config = {
         "effector-solid": "effectorSolid",
       },
     },
-    {
-      file: "./dist/effector-form-solid.iife.js",
-      format: "iife",
-      name: "EffectorFormForSolid",
-      sourcemap: true,
-      globals: {
-        "effector": "effector",
-        "effector-solid": "effectorSolid",
-      },
-    },
   ],
   plugins: [
     replace({

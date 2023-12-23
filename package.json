@@ -1,31 +1,37 @@
 {
   "name": "effector-form-solid",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Effector Form by 42-px for Solidjs",
   "main": "./dist/effector-form-solid.cjs.js",
-  "jsnext:main": "./dist/index.js",
-  "module": "./dist/index.js",
+  "jsnext:main": "./dist/index.mjs",
+  "module": "./dist/index.mjs",
   "umd:main": "./dist/effector-form-solid.umd.js",
-  "browser": "./dist/index.js",
+  "browser": "./dist/index.mjs",
   "exports": {
     ".": {
       "import": "./dist/index.mjs",
       "require": "./dist/effector-form-solid.cjs.js",
       "node": "./dist/effector-form-solid.cjs.js",
-      "default": "./dist/index.js"
+      "default": "./dist/index.mjs"
     }
   },
   "repository": "https://github.com/biscet/effector-form-solid.git",
   "author": "Егор Прохоров <befealmellow@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "build": "cross-env NODE_ENV=production rollup -c rollup.config.js && babel src -d dist"
+    "build": "cross-env NODE_ENV=production rollup -c rollup.config.js"
   },
   "peerDependencies": {
     "effector": ">=22.8.6 <24.0.0",
-    "effector-solid": ">=0.22.7"
+    "effector-solid": ">=0.22.7",
+    "solid-js": ">=1.6.8"
   },
   "dependencies": {
+    "effector": "22.8.6",
+    "effector-solid": "0.22.7",
+    "solid-js": "1.6.8"
+  },
+  "devDependencies": {
     "@babel/cli": "7.23.4",
     "@babel/core": "7.23.6",
     "@babel/preset-env": "7.23.6",
@@ -36,11 +42,8 @@
     "babel-preset-minify": "0.5.2",
     "babel-preset-solid": "1.8.6",
     "cross-env": "7.0.3",
-    "effector": "22.8.6",
-    "effector-solid": "0.22.7",
     "rollup": "2.79.1",
-    "rollup-plugin-terser": "7.0.2",
-    "solid-js": "1.6.8"
+    "rollup-plugin-terser": "7.0.2"
   },
   "keywords": [
     "solidjs",
