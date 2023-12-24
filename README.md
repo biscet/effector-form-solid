@@ -1,38 +1,42 @@
 # Адаптированная библиотека effector-forms от 42-px для использования совместно с SolidJS.
 
-- [Установка](#setup)
-- [Использование effector-forms](#effector-forms)
-- [Hook useForm для SolidJS](#useForm)
-
-<a name="setup"><h2>Установка</h2></a>
+## Установка
 
 `yarn add effector-form-solid` or `npm install effector-form-solid`
 
-<a name="effector-forms"><h2>Использование effector-forms</h2></a>
+## Использование effector-forms
 
 ```js
 import { sample } from "effector";
-import { createForm } from "src/lib/effector-forms";
+import { createForm } from "effector-form-solid";
 
-export const loginForm = createForm({
+const loginForm = createForm({
   fields: {
     email: {
       init: "",
       rules: [
         {
           name: "email",
-          validator: (value) => /\S+@\S+\.\S+/.test(value),
+          validator: (value) => ({
+            isValid: /\S+@\S+\.\S+/.test(value),
+            errorText: "Incorrect email",
+          }),
         },
       ],
+      validateOn: ["blur"],
     },
     password: {
       init: "",
       rules: [
         {
           name: "required",
-          validator: Boolean,
+          validator: (value) => ({
+            isValid: value.length > 0,
+            errorText: "This field is required",
+          }),
         },
       ],
+      validateOn: ["blur"],
     },
   },
   validateOn: ["submit"],
@@ -41,38 +45,131 @@ export const loginForm = createForm({
 sample({
   clock: loginForm.formValidated,
   fn: (e) => {
-    console.log(e);
+    console.log("submit loginForm", e);
   },
 });
 ```
 
 [Подробное описание можно найти в оригинальном репозитории 42-px](https://github.com/42-px/effector-forms)
 
-<a name="useForm"><h2>Hook useForm для SolidJS</h2></a>
+## Hook useForm для SolidJS
 
 ```js
-import { useForm } from "src/lib/effector-forms";
-import { loginForm } from "...";
+import { useForm } from "effector-form-solid";
 
 export const Login = () => {
-  const { signalValues, sumbit } = useForm(loginForm, ["email", "password"]);
+  const { submit, values } = useForm(loginForm);
 
   return (
-    <form onSubmit={sumbit}>
+    <form onSubmit={submit}>
       <input
         type="text"
-        value={signalValues.email.value()}
-        onInput={(e) => signalValues.email.onChange(e.target.value)}
+        name="email"
+        value={values.email.value()}
+        onInput={(e) => values.email.onChange(e.target.value)}
+        onBlur={values.email.onBlur}
       />
+      <p>{values.email.errorText()}</p>
 
       <input
         type="password"
-        value={signalValues.password.value()}
-        onInput={(e) => signalValues.password.onChange(e.target.value)}
+        name="password"
+        value={values.password.value()}
+        onInput={(e) => values.password.onChange(e.target.value)}
+        onBlur={values.password.onBlur}
       />
+      <p>{values.password.errorText()}</p>
 
-      <button type="submit">submit</button>
+      <button type="submit">Submit</button>
     </form>
   );
 };
+```
+
+## Hook useFormSignals для SolidJS
+
+```js
+import { useFormSignals, createForm } from "effector-form-solid";
+
+const fullNameForm = createForm({
+  fields: {
+    firstName: {
+      init: "",
+    },
+    secondName: {
+      init: "",
+    },
+    lastName: {
+      init: "",
+    },
+    age: {
+      init: "",
+    },
+  },
+  validateOn: ["submit"],
+});
+
+export const Login = () => {
+  const values = useFormSignals(fullNameForm);
+
+  console.log("useFormSignals", values);
+
+  return (
+    <form
+      onSubmit={(e) => {
+        e.preventDefault();
+        fullNameForm.submit();
+      }}
+    >
+      <input
+        type="text"
+        name="firstName"
+        value={values.firstName.value()}
+        onInput={(e) => values.firstName.onChange(e.target.value)}
+        onBlur={values.firstName.onBlur}
+      />
+
+      <br />
+
+      <input
+        type="text"
+        name="secondName"
+        value={values.secondName.value()}
+        onInput={(e) => values.secondName.onChange(e.target.value)}
+        onBlur={values.secondName.onBlur}
+      />
+
+      <br />
+
+      <button type="submit">Submit</button>
+    </form>
+  );
+};
+```
+
+## Получение определенных сигналов в хуках
+
+```js
+const fullNameForm = createForm({
+  fields: {
+    firstName: {
+      init: "",
+    },
+    secondName: {
+      init: "",
+    },
+    lastName: {
+      init: "",
+    },
+    age: {
+      init: "",
+    },
+  },
+  validateOn: ["submit"],
+});
+
+const values = useFormSignals(fullNameForm, ["firstName", "secondName"]);
+const { values } = useForm(fullNameForm, ["firstName", "secondName"]);
+
+// values => { firstName: {...}, secondName: {...} }
 ```
