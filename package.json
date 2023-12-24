@@ -1,14 +1,14 @@
 {
   "name": "effector-form-solid",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Effector Form by 42-px for Solidjs",
   "main": "./dist/effector-form-solid.cjs.js",
   "jsnext:main": "./dist/index.mjs",
   "module": "./dist/index.mjs",
-  "umd:main": "./dist/effector-form-solid.umd.js",
   "browser": "./dist/index.mjs",
   "exports": {
     ".": {
+      "types": "./index.d.ts",
       "import": "./dist/index.mjs",
       "require": "./dist/effector-form-solid.cjs.js",
       "node": "./dist/effector-form-solid.cjs.js",
@@ -19,8 +19,7 @@
   "author": "Егор Прохоров <befealmellow@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "build": "cross-env NODE_ENV=production rollup -c rollup.config.js",
-    "web:test": "vite --mode development --config vite.config.js"
+    "build": "cross-env NODE_ENV=production rollup -c rollup.config.js"
   },
   "peerDependencies": {
     "effector": ">=22.8.6 <24.0.0",
@@ -33,27 +32,22 @@
     "solid-js": "1.8.7"
   },
   "devDependencies": {
-    "@babel/cli": "7.23.4",
     "@babel/core": "7.23.6",
-    "@babel/plugin-proposal-class-properties": "7.18.6",
-    "@babel/plugin-transform-runtime": "7.23.6",
     "@babel/preset-env": "7.23.6",
     "@rollup/plugin-babel": "5.3.1",
     "@rollup/plugin-commonjs": "21.1.0",
     "@rollup/plugin-node-resolve": "13.3.0",
     "@rollup/plugin-replace": "3.1.0",
-    "babel-plugin-transform-jsx": "^2.0.0",
     "babel-preset-minify": "0.5.2",
-    "babel-preset-solid": "^1.8.6",
     "cross-env": "7.0.3",
     "rollup": "2.79.1",
-    "rollup-plugin-terser": "7.0.2",
-    "vite": "4.0.3",
-    "vite-plugin-solid": "2.5.0"
+    "rollup-plugin-terser": "7.0.2"
   },
   "keywords": [
     "solidjs",
-    "effector"
+    "effector",
+    "form",
+    "effector-form"
   ],
   "files": [
     "dist"

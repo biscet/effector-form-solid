@@ -4,11 +4,12 @@
 
 `yarn add effector-form-solid` or `npm install effector-form-solid`
 
-## Использование effector-forms
+[Подробное описание можно найти в оригинальном репозитории 42-px](https://github.com/42-px/effector-forms)
+
+## Hook useForm для SolidJS
 
 ```js
-import { sample } from "effector";
-import { createForm } from "effector-form-solid";
+import { useForm, createForm } from "effector-form-solid";
 
 const loginForm = createForm({
   fields: {
@@ -41,21 +42,6 @@ const loginForm = createForm({
   },
   validateOn: ["submit"],
 });
-
-sample({
-  clock: loginForm.formValidated,
-  fn: (e) => {
-    console.log("submit loginForm", e);
-  },
-});
-```
-
-[Подробное описание можно найти в оригинальном репозитории 42-px](https://github.com/42-px/effector-forms)
-
-## Hook useForm для SolidJS
-
-```js
-import { useForm } from "effector-form-solid";
 
 export const Login = () => {
   const { submit, values } = useForm(loginForm);
