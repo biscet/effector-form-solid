@@ -1,29 +1,44 @@
-import { useUnit } from 'effector-solid';
+import { useUnit } from "effector-solid";
 
-const isEmpty = (obj) => [Object, Array].includes((obj || {}).constructor)
-    && Object.entries((obj || {})).length === 0;
+const isEmpty = (obj) =>
+  [Object, Array].includes((obj || {}).constructor) &&
+  Object.entries(obj || {}).length === 0;
 
-export const useForm = (currentForm, labelsForSignals) => {
-  const form = useUnit(currentForm);
-  const values = useUnit(currentForm.$values);
-  let signalValues = {};
+export const useFormSignals = (currentForm, signals) => {
+  const labelsForSignals = Object.keys(currentForm.fields);
+  let values = {};
 
-  if (!isEmpty(labelsForSignals)) {
+  if (isEmpty(signals)) {
     labelsForSignals.forEach((label) => {
-      signalValues = { ...signalValues, [label]: useUnit(currentForm.fields[label]) };
+      values = {
+        ...values,
+        [label]: useUnit(currentForm.fields[label]),
+      };
+    });
+  } else {
+    signals.forEach((label) => {
+      values = {
+        ...values,
+        [label]: useUnit(currentForm.fields[label]),
+      };
     });
   }
+
+  return values;
+};
+
+export const useForm = (currentForm, signals) => {
+  const form = useUnit(currentForm);
+  const values = useFormSignals(currentForm, signals);
 
   const submitHandler = (e) => {
     e.preventDefault();
     form.submit();
   };
 
-  return ({
+  return {
     ...form,
-    fields: currentForm.fields,
-    sumbit: submitHandler,
+    submit: submitHandler,
     values,
-    signalValues
-  });
+  };
 };
