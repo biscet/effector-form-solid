@@ -44,27 +44,27 @@ const loginForm = createForm({
 });
 
 export const Login = () => {
-  const { submit, values } = useForm(loginForm);
+  const { submit, fields } = useForm(loginForm);
 
   return (
     <form onSubmit={submit}>
       <input
         type="text"
         name="email"
-        value={values.email.value()}
-        onInput={(e) => values.email.onChange(e.target.value)}
-        onBlur={values.email.onBlur}
+        value={fields.email.value()}
+        onInput={(e) => fields.email.onChange(e.target.value)}
+        onBlur={fields.email.onBlur}
       />
-      <p>{values.email.errorText()}</p>
+      <p>{fields.email.errorText()}</p>
 
       <input
         type="password"
         name="password"
-        value={values.password.value()}
-        onInput={(e) => values.password.onChange(e.target.value)}
-        onBlur={values.password.onBlur}
+        value={fields.password.value()}
+        onInput={(e) => fields.password.onChange(e.target.value)}
+        onBlur={fields.password.onBlur}
       />
-      <p>{values.password.errorText()}</p>
+      <p>{fields.password.errorText()}</p>
 
       <button type="submit">Submit</button>
     </form>
@@ -96,9 +96,9 @@ const fullNameForm = createForm({
 });
 
 export const Login = () => {
-  const values = useFormSignals(fullNameForm);
+  const fields = useFormSignals(fullNameForm);
 
-  console.log("useFormSignals", values);
+  console.log("useFormSignals", fields);
 
   return (
     <form
@@ -110,9 +110,9 @@ export const Login = () => {
       <input
         type="text"
         name="firstName"
-        value={values.firstName.value()}
-        onInput={(e) => values.firstName.onChange(e.target.value)}
-        onBlur={values.firstName.onBlur}
+        value={fields.firstName.value()}
+        onInput={(e) => fields.firstName.onChange(e.target.value)}
+        onBlur={fields.firstName.onBlur}
       />
 
       <br />
@@ -120,9 +120,9 @@ export const Login = () => {
       <input
         type="text"
         name="secondName"
-        value={values.secondName.value()}
-        onInput={(e) => values.secondName.onChange(e.target.value)}
-        onBlur={values.secondName.onBlur}
+        value={fields.secondName.value()}
+        onInput={(e) => fields.secondName.onChange(e.target.value)}
+        onBlur={fields.secondName.onBlur}
       />
 
       <br />
@@ -154,8 +154,63 @@ const fullNameForm = createForm({
   validateOn: ["submit"],
 });
 
-const values = useFormSignals(fullNameForm, ["firstName", "secondName"]);
-const { values } = useForm(fullNameForm, ["firstName", "secondName"]);
+const fields = useFormSignals(fullNameForm, ["firstName", "secondName"]);
+const { fields } = useForm(fullNameForm, ["firstName", "secondName"]);
 
-// values => { firstName: {...}, secondName: {...} }
+// fields => { firstName: {...}, secondName: {...} }
+```
+
+## Hook useFormField для SolidJS
+
+```js
+import { useFormField, createForm } from "effector-form-solid";
+
+const nameForm = createForm({
+  fields: {
+    firstName: {
+      init: "",
+    },
+    secondName: {
+      init: "",
+    },
+  },
+  validateOn: ["submit"],
+});
+
+export const Login = () => {
+  const { onChangeField: onChangeFirstName, value: firstNameValue } =
+    useFormField(nameForm, "firstName");
+
+  const { onChangeField: onChangeSecondName, value: secondNameValue } =
+    useFormField(nameForm, "secondName");
+
+  return (
+    <form
+      onSubmit={(e) => {
+        e.preventDefault();
+        nameForm.submit();
+      }}
+    >
+      <input
+        type="text"
+        name="firstName"
+        value={firstNameValue()}
+        onInput={onChangeFirstName}
+      />
+
+      <br />
+
+      <input
+        type="text"
+        name="secondName"
+        value={secondNameValue()}
+        onInput={onChangeSecondName}
+      />
+
+      <br />
+
+      <button type="submit">Submit</button>
+    </form>
+  );
+};
 ```
