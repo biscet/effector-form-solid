@@ -1,6 +1,6 @@
 {
   "name": "effector-form-solid",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "Effector Form by 42-px for Solidjs",
   "main": "./dist/effector-form-solid.cjs.js",
   "jsnext:main": "./dist/index.mjs",

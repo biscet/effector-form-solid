@@ -4,7 +4,8 @@
 
 `yarn add effector-form-solid` or `npm install effector-form-solid`
 
-[Подробное описание можно найти в оригинальном репозитории 42-px](https://github.com/42-px/effector-forms)
+- [Документация](https://biscet.github.io/effector-form-solid-docs/)
+- [Подробное описание можно найти в оригинальном репозитории 42-px](https://github.com/42-px/effector-forms)
 
 ## Hook useForm для SolidJS
 
