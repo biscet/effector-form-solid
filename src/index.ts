@@ -14,5 +14,5 @@ export {
   ValidationEvent,
   ValidationResult,
   FormValues,
-  Form
+  Form,
 } from "./types";

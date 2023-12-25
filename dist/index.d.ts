@@ -337,45 +337,43 @@ export type Form<Values extends AnyFormValues> = {
 	"@@unitShape": () => FormUnitShape<Values>;
 };
 /**
-* This is the main factory in the library that creates
-* the forms shape according to the given configuration.
-*
-* Do not try to pass a type in the Values generic! Form types are inferred automatically from the passed "fields" object
-*
-* @param config - The form configuration object
-* @returns The shape of effector units
-* @example
-*
-* ```ts
-* const form = createForm({
-*      fields: {
-*          username: {
-*              init: "",
-*              rules: [
-*                  {
-*                      name: "required",
-*                      validator: (value: string) => Boolean(value)
-*                  }
-*              ]
-*          },
-*          bio: {
-*              init: "",
-*              rules: []
-*          }
-*      },
-*      validateOn: ["change"],
-* })
-* ```
-* @group Factories
-*/
+ * This is the main factory in the library that creates
+ * the forms shape according to the given configuration.
+ *
+ * Do not try to pass a type in the Values generic! Form types are inferred automatically from the passed "fields" object
+ *
+ * @param config - The form configuration object
+ * @returns The shape of effector units
+ * @example
+ *
+ * ```ts
+ * const form = createForm({
+ *      fields: {
+ *          username: {
+ *              init: "",
+ *              rules: [
+ *                  {
+ *                      name: "required",
+ *                      validator: (value: string) => Boolean(value)
+ *                  }
+ *              ]
+ *          },
+ *          bio: {
+ *              init: "",
+ *              rules: []
+ *          }
+ *      },
+ *      validateOn: ["change"],
+ * })
+ * ```
+ * @group Factories
+ */
 export declare function createForm<Values extends AnyFormValues>(config: FormConfig<Values>): Form<Values>;
 /**
  * @group Hooks
  */
-export declare const useFormSignals: (currentForm: any, signals: any) => {};
-export declare const useForm: (currentForm: any, signals: any) => any;
-export declare const useFormField: (currentForm: any, fieldName: any) => {
-	onChangeField: (e: any) => unknown;
-};
+export declare function useFormSignals<F extends AnyFormValues, S extends Array<string>>(currentForm: Form<F>, signals: S): any;
+export declare function useForm<F extends AnyFormValues, S extends Array<string>>(currentForm: Form<F>, signals: S): any;
+export declare function useFormField<F extends AnyFormValues, N extends string>(currentForm: Form<F>, fieldName: N): any;
 
 export {};
